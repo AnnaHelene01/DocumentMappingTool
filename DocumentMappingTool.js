@@ -24,6 +24,16 @@ const DocumentMappingTool = () => {
     const [responsiblePersonRecnoPTCase, setResponsiblePersonRecnoPTCase] = useState("");
     const [responsiblePersonRecnoØKSDocument, setResponsiblePersonRecnoØKSDocument] = useState("");
     const [responsiblePersonRecnoØKSCase, setResponsiblePersonRecnoØKSCase] = useState("");
+
+    //Tilstander for ResponsibleEnterpriseRecno for hvert system - sak og dokument
+    const [responsibleEnterpriseRecnoAGROSDocument, setResponsibleEnterpriseRecnoAGROSDocument] = useState("");
+    const [responsibleEnterpriseRecnoAGROSCase, setResponsibleEnterpriseRecnoAGROSCase] = useState("");
+    const [responsibleEnterpriseRecnoEStilDocument, setResponsibleEnterpriseRecnoEStilDocument] = useState("");
+    const [responsibleEnterpriseRecnoEStilCase, setResponsibleEnterpriseRecnoEStilCase] = useState("");
+    const [responsibleEnterpriseRecnoPTDocument, setResponsibleEnterpriseRecnoPTDocument] = useState("");
+    const [responsibleEnterpriseRecnoPTCase, setResponsibleEnterpriseRecnoPTCase] = useState("");
+    const [responsibleEnterpriseRecnoØKSDocument, setResponsibleEnterpriseRecnoØKSDocument] = useState("");
+    const [responsibleEnterpriseRecnoØKSCase, setResponsibleEnterpriseRecnoØKSCase] = useState("");
  
     const toggleDocumentSelectionAGROS = (documentType) => {
         const newSelection = { ...selectedDocumentsAGROS };
@@ -31,7 +41,7 @@ const DocumentMappingTool = () => {
  
         if (newSelection[documentType] && !documentMappings[documentType]) {
             const newMappings = { ...documentMappings };
-            newMappings[documentType] = createTemplateMapping(documentType, "AGROS", responsiblePersonRecnoAGROSDocument, responsiblePersonRecnoAGROSCase);
+            newMappings[documentType] = createTemplateMapping(documentType, "AGROS", responsiblePersonRecnoAGROSDocument, responsiblePersonRecnoAGROSCase, responsibleEnterpriseRecnoAGROSDocument, responsibleEnterpriseRecnoAGROSCase);
             setDocumentMappings(newMappings);
         }
  
@@ -44,7 +54,7 @@ const DocumentMappingTool = () => {
  
         if (newSelection[documentType] && !documentMappings[documentType]) {
             const newMappings = { ...documentMappings };
-            newMappings[documentType] = createTemplateMapping(documentType, "eStil", responsiblePersonRecnoEStilDocument, responsiblePersonRecnoEStilCase);
+            newMappings[documentType] = createTemplateMapping(documentType, "eStil", responsiblePersonRecnoEStilDocument, responsiblePersonRecnoEStilCase, responsibleEnterpriseRecnoEStilDocument, responsibleEnterpriseRecnoEStilCase);
             setDocumentMappings(newMappings);
         }
  
@@ -57,7 +67,7 @@ const DocumentMappingTool = () => {
  
         if (newSelection[documentType] && !documentMappings[documentType]) {
             const newMappings = { ...documentMappings };
-            newMappings[documentType] = createTemplateMapping(documentType, "PT", responsiblePersonRecnoPTDocument, responsiblePersonRecnoPTCase);
+            newMappings[documentType] = createTemplateMapping(documentType, "PT", responsiblePersonRecnoPTDocument, responsiblePersonRecnoPTCase, responsibleEnterpriseRecnoPTDocument, responsibleEnterpriseRecnoPTCase);
             setDocumentMappings(newMappings);
         }
  
@@ -70,7 +80,7 @@ const DocumentMappingTool = () => {
  
         if (newSelection[documentType] && !documentMappings[documentType]) {
             const newMappings = { ...documentMappings };
-            newMappings[documentType] = createTemplateMapping(documentType, "ØKS", responsiblePersonRecnoØKSDocument, responsiblePersonRecnoØKSCase);
+            newMappings[documentType] = createTemplateMapping(documentType, "ØKS", responsiblePersonRecnoØKSDocument, responsiblePersonRecnoØKSCase, responsibleEnterpriseRecnoØKSDocument, responsibleEnterpriseRecnoØKSCase);
             setDocumentMappings(newMappings);
         }
  
@@ -117,7 +127,69 @@ const DocumentMappingTool = () => {
                     MainPropertyName: "AdditionalFields",
                     SubPropertyName: "Gardsnr",
                 },
-                // Legg til flere felt her...
+                bruksnr: {
+                    RootPath: "InsertCases",
+                    MainContract: "CreateCaseParameter",
+                    SubContract: "AdditionalFieldParameter",
+                    MainPropertyName: "AdditionalFields",
+                    SubPropertyName: "Bruksnr"
+                },
+                festenr: {
+                    RootPath: "InsertCases",
+                    MainContract: "CreateCaseParameter",
+                    SubContract: "AdditionalFieldParameter",
+                    MainPropertyName: "AdditionalFields",
+                    SubPropertyName: "Festenr"
+                },
+                sokerOrgnr: {
+                    RootPath: "InsertCases",
+                    MainContract: "CreateCaseParameter",
+                    SubContract: "AdditionalFieldParameter",
+                    MainPropertyName: "AdditionalFields",
+                    SubPropertyName: "Orgnr_søker"
+                },
+                sokerFodselsnr: {
+                    RootPath: "InsertCases",
+                    MainContract: "CreateCaseParameter",
+                    SubContract: "AdditionalFieldParameter",
+                    MainPropertyName: "AdditionalFields",
+                    SubPropertyName: "Personnr_søker"
+                },
+                sokerFornavn: {
+                    RootPath: "InsertCases",
+                    MainContract: "CreateCaseParameter",
+                    SubContract: "AdditionalFieldParameter",
+                    MainPropertyName: "AdditionalFields",
+                    SubPropertyName: "sokerFornavn"
+                },
+                sokerEtternavn: {
+                    RootPath: "InsertCases",
+                    MainContract: "CreateCaseParameter",
+                    SubContract: "AdditionalFieldParameter",
+                    MainPropertyName: "AdditionalFields",
+                    SubPropertyName: "sokerEtternavn"
+                },
+                Behandlende_kommune_orgnr: {
+                    RootPath: "InsertCases",
+                    MainContract: "CreateCaseParameter",
+                    SubContract: "AdditionalFieldParameter",
+                    MainPropertyName: "AdditionalFields",
+                    SubPropertyName: "Behandlende_kommune_orgnr"
+                },
+                Behandlende_kommune_navn: {
+                    RootPath: "InsertCases",
+                    MainContract: "CreateCaseParameter",
+                    SubContract: "AdditionalFieldParameter",
+                    MainPropertyName: "AdditionalFields",
+                    SubPropertyName: "Behandlende_kommune_navn"
+                },
+                sokerForetaksnavn: {
+                    RootPath: "InsertCases",
+                    MainContract: "CreateCaseParameter",
+                    SubContract: "AdditionalFieldParameter",
+                    MainPropertyName: "AdditionalFields",
+                    SubPropertyName: "sokerForetaksnavn"
+                }
             },
         },
         metadataForImport: {
@@ -297,24 +369,42 @@ const generateAdditionalConfigurationJson = () => {
                         selectedDocuments={selectedDocumentsAGROS}
                         toggleDocumentSelection={toggleDocumentSelectionAGROS}
                     />
-                <div style={{ display: 'flex', alignItems: 'center', marginTop: '2em' }}>
-                    <label style={{ marginRight: '10px' }}>Responsible Person Recno for AGROS Document:</label>
-                    <input 
-                        type="text" 
-                        value={responsiblePersonRecnoAGROSDocument} 
-                        onChange={(e) => setResponsiblePersonRecnoAGROSDocument(e.target.value)} 
-                        placeholder="Responsible Person Recno for AGROS Document" 
-                    />
-                </div>
-                <div style={{ display: 'flex', alignItems: 'center', marginTop: '1em' }}>
-                    <label style={{ marginRight: '10px' }}>Responsible Person Recno for AGROS Case:</label>
-                    <input 
-                        type="text" 
-                        value={responsiblePersonRecnoAGROSCase} 
-                        onChange={(e) => setResponsiblePersonRecnoAGROSCase(e.target.value)} 
-                        placeholder="Responsible Person Recno for AGROS Case" 
-                    />
-                </div>
+                        <div style={{ display: 'flex', alignItems: 'center', marginTop: '2em' }}>
+                            <label style={{ marginRight: '10px' }}>Responsible Person Recno for AGROS Document:</label>
+                            <input 
+                                type="text" 
+                                value={responsiblePersonRecnoAGROSDocument} 
+                                onChange={(e) => setResponsiblePersonRecnoAGROSDocument(e.target.value)} 
+                                placeholder="Responsible Person Recno for AGROS Document" 
+                            />
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', marginTop: '1em' }}>
+                            <label style={{ marginRight: '10px' }}>Responsible Person Recno for AGROS Case:</label>
+                            <input 
+                                type="text" 
+                                value={responsiblePersonRecnoAGROSCase} 
+                                onChange={(e) => setResponsiblePersonRecnoAGROSCase(e.target.value)} 
+                                placeholder="Responsible Person Recno for AGROS Case" 
+                            />
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', marginTop: '2em' }}>
+                            <label style={{ marginRight: '10px' }}>Responsible Enterprise Recno for AGROS Document:</label>
+                            <input 
+                                type="text" 
+                                value={responsibleEnterpriseRecnoAGROSDocument} 
+                                onChange={(e) => setResponsibleEnterpriseRecnoAGROSDocument(e.target.value)} 
+                                placeholder="Responsible Enterprise Recno for AGROS Document" 
+                            />
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', marginTop: '1em' }}>
+                            <label style={{ marginRight: '10px' }}>Responsible Enterprise Recno for AGROS Case:</label>
+                            <input 
+                                type="text" 
+                                value={responsibleEnterpriseRecnoAGROSCase} 
+                                onChange={(e) => setResponsibleEnterpriseRecnoAGROSCase(e.target.value)} 
+                                placeholder="Responsible Enterprise Recno for AGROS Case" 
+                            />
+                        </div>
                 </div>
 
                 {/* eStil Document Types */}
@@ -325,24 +415,42 @@ const generateAdditionalConfigurationJson = () => {
                         selectedDocuments={selectedDocumentsEStil}
                         toggleDocumentSelection={toggleDocumentSelectionEStil}
                     />
-                <div style={{ display: 'flex', alignItems: 'center', marginTop: '2em' }}>
-                    <label style={{ marginRight: '10px' }}>Responsible Person Recno for eStil Document:</label>
-                    <input 
-                        type="text" 
-                        value={responsiblePersonRecnoEStilDocument} 
-                        onChange={(e) => setResponsiblePersonRecnoEStilDocument(e.target.value)} 
-                        placeholder="Responsible Person Recno for eStil Document" 
-                    />
-                </div>
-                <div style={{ display: 'flex', alignItems: 'center', marginTop: '1em' }}>
-                    <label style={{ marginRight: '10px' }}>Responsible Person Recno for eStil Case:</label>
-                    <input 
-                        type="text" 
-                        value={responsiblePersonRecnoEStilCase} 
-                        onChange={(e) => setResponsiblePersonRecnoEStilCase(e.target.value)} 
-                        placeholder="Responsible Person Recno for eStil Case" 
-                    />
-                </div>
+                        <div style={{ display: 'flex', alignItems: 'center', marginTop: '2em' }}>
+                            <label style={{ marginRight: '10px' }}>Responsible Person Recno for eStil Document:</label>
+                            <input 
+                                type="text" 
+                                value={responsiblePersonRecnoEStilDocument} 
+                                onChange={(e) => setResponsiblePersonRecnoEStilDocument(e.target.value)} 
+                                placeholder="Responsible Person Recno for eStil Document" 
+                            />
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', marginTop: '1em' }}>
+                            <label style={{ marginRight: '10px' }}>Responsible Person Recno for eStil Case:</label>
+                            <input 
+                                type="text" 
+                                value={responsiblePersonRecnoEStilCase} 
+                                onChange={(e) => setResponsiblePersonRecnoEStilCase(e.target.value)} 
+                                placeholder="Responsible Person Recno for eStil Case" 
+                            />
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', marginTop: '2em' }}>
+                            <label style={{ marginRight: '10px' }}>Responsible Enterprise Recno for eStil Document:</label>
+                            <input 
+                                type="text" 
+                                value={responsibleEnterpriseRecnoEStilDocument} 
+                                onChange={(e) => setResponsibleEnterpriseRecnoEStilDocument(e.target.value)} 
+                                placeholder="Responsible Enterprise Recno for eStil Document" 
+                            />
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', marginTop: '1em' }}>
+                            <label style={{ marginRight: '10px' }}>Responsible Enterprise Recno for eStil Case:</label>
+                            <input 
+                                type="text" 
+                                value={responsibleEnterpriseRecnoEStilCase} 
+                                onChange={(e) => setResponsibleEnterpriseRecnoEStilCase(e.target.value)} 
+                                placeholder="Responsible Enterprise Recno for eStil Case" 
+                            />
+                        </div>
                 </div>
 
                 {/* PT Document Types */}
@@ -353,24 +461,42 @@ const generateAdditionalConfigurationJson = () => {
                         selectedDocuments={selectedDocumentsPT}
                         toggleDocumentSelection={toggleDocumentSelectionPT}
                     />
-                <div style={{ display: 'flex', alignItems: 'center', marginTop: '2em' }}>
-                    <label style={{ marginRight: '10px' }}>Responsible Person Recno for PT Document:</label>
-                    <input 
-                        type="text" 
-                        value={responsiblePersonRecnoPTDocument} 
-                        onChange={(e) => setResponsiblePersonRecnoPTDocument(e.target.value)} 
-                        placeholder="Responsible Person Recno for PT Document" 
-                    />
-                </div>
-                <div style={{ display: 'flex', alignItems: 'center', marginTop: '1em' }}>
-                    <label style={{ marginRight: '10px' }}>Responsible Person Recno for PT Case:</label>
-                    <input 
-                        type="text" 
-                        value={responsiblePersonRecnoPTCase} 
-                        onChange={(e) => setResponsiblePersonRecnoPTCase(e.target.value)} 
-                        placeholder="Responsible Person Recno for PT Case" 
-                    />
-                </div>
+                        <div style={{ display: 'flex', alignItems: 'center', marginTop: '2em' }}>
+                            <label style={{ marginRight: '10px' }}>Responsible Person Recno for PT Document:</label>
+                            <input 
+                                type="text" 
+                                value={responsiblePersonRecnoPTDocument} 
+                                onChange={(e) => setResponsiblePersonRecnoPTDocument(e.target.value)} 
+                                placeholder="Responsible Person Recno for PT Document" 
+                            />
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', marginTop: '1em' }}>
+                            <label style={{ marginRight: '10px' }}>Responsible Person Recno for PT Case:</label>
+                            <input 
+                                type="text" 
+                                value={responsiblePersonRecnoPTCase} 
+                                onChange={(e) => setResponsiblePersonRecnoPTCase(e.target.value)} 
+                                placeholder="Responsible Person Recno for PT Case" 
+                            />
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', marginTop: '2em' }}>
+                            <label style={{ marginRight: '10px' }}>Responsible Enterprise Recno for PT Document:</label>
+                            <input 
+                                type="text" 
+                                value={responsibleEnterpriseRecnoPTDocument} 
+                                onChange={(e) => setResponsibleEnterpriseRecnoPTDocument(e.target.value)} 
+                                placeholder="Responsible Enterprise Recno for PT Document" 
+                            />
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', marginTop: '1em' }}>
+                            <label style={{ marginRight: '10px' }}>Responsible Enterprise Recno for PT Case:</label>
+                            <input 
+                                type="text" 
+                                value={responsibleEnterpriseRecnoPTCase} 
+                                onChange={(e) => setResponsibleEnterpriseRecnoPTCase(e.target.value)} 
+                                placeholder="Responsible Enterprise Recno for PT Case" 
+                            />
+                        </div>
                 </div>
 
                 {/* ØKS Document Types */}
@@ -382,24 +508,42 @@ const generateAdditionalConfigurationJson = () => {
                         toggleDocumentSelection={toggleDocumentSelectionØKS}
                     />
 
-                <div style={{ display: 'flex', alignItems: 'center', marginTop: '2em' }}>
-                    <label style={{ marginRight: '10px' }}>Responsible Person Recno for ØKS Document:</label>
-                    <input 
-                        type="text" 
-                        value={responsiblePersonRecnoØKSDocument} 
-                        onChange={(e) => setResponsiblePersonRecnoØKSDocument(e.target.value)} 
-                        placeholder="Responsible Person Recno for ØKS Document" 
-                    />
-                </div>
-                <div style={{ display: 'flex', alignItems: 'center', marginTop: '1em' }}>
-                    <label style={{ marginRight: '10px' }}>Responsible Person Recno for ØKS Case:</label>
-                    <input 
-                        type="text" 
-                        value={responsiblePersonRecnoØKSCase} 
-                        onChange={(e) => setResponsiblePersonRecnoØKSCase(e.target.value)} 
-                        placeholder="Responsible Person Recno for ØKS Case" 
-                    />
-                </div>
+                        <div style={{ display: 'flex', alignItems: 'center', marginTop: '2em' }}>
+                            <label style={{ marginRight: '10px' }}>Responsible Person Recno for ØKS Document:</label>
+                            <input 
+                                type="text" 
+                                value={responsiblePersonRecnoØKSDocument} 
+                                onChange={(e) => setResponsiblePersonRecnoØKSDocument(e.target.value)} 
+                                placeholder="Responsible Person Recno for ØKS Document" 
+                            />
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', marginTop: '1em' }}>
+                            <label style={{ marginRight: '10px' }}>Responsible Person Recno for ØKS Case:</label>
+                            <input 
+                                type="text" 
+                                value={responsiblePersonRecnoØKSCase} 
+                                onChange={(e) => setResponsiblePersonRecnoØKSCase(e.target.value)} 
+                                placeholder="Responsible Person Recno for ØKS Case" 
+                            />
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', marginTop: '2em' }}>
+                            <label style={{ marginRight: '10px' }}>Responsible Enterprise Recno for ØKS Document:</label>
+                            <input 
+                                type="text" 
+                                value={responsibleEnterpriseRecnoØKSDocument} 
+                                onChange={(e) => setResponsibleEnterpriseRecnoØKSDocument(e.target.value)} 
+                                placeholder="Responsible Enterprise Recno for ØKS Document" 
+                            />
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', marginTop: '1em' }}>
+                            <label style={{ marginRight: '10px' }}>Responsible Enterprise Recno for ØKS Case:</label>
+                            <input 
+                                type="text" 
+                                value={responsibleEnterpriseRecnoØKSCase} 
+                                onChange={(e) => setResponsibleEnterpriseRecnoØKSCase(e.target.value)} 
+                                placeholder="Responsible Enterprise Recno for ØKS Case" 
+                            />
+                        </div>
                 </div>
             </div>
             <div className="flex-right">

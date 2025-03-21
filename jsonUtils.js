@@ -37,7 +37,69 @@ const generateFinalJson = () => {
                     MainPropertyName: "AdditionalFields",
                     SubPropertyName: "Gardsnr",
                 },
-                // Legg til flere felt her...
+                bruksnr: {
+                    RootPath: "InsertCases",
+                    MainContract: "CreateCaseParameter",
+                    SubContract: "AdditionalFieldParameter",
+                    MainPropertyName: "AdditionalFields",
+                    SubPropertyName: "Bruksnr"
+                },
+                festenr: {
+                    RootPath: "InsertCases",
+                    MainContract: "CreateCaseParameter",
+                    SubContract: "AdditionalFieldParameter",
+                    MainPropertyName: "AdditionalFields",
+                    SubPropertyName: "Festenr"
+                },
+                sokerOrgnr: {
+                    RootPath: "InsertCases",
+                    MainContract: "CreateCaseParameter",
+                    SubContract: "AdditionalFieldParameter",
+                    MainPropertyName: "AdditionalFields",
+                    SubPropertyName: "Orgnr_søker"
+                },
+                sokerFodselsnr: {
+                    RootPath: "InsertCases",
+                    MainContract: "CreateCaseParameter",
+                    SubContract: "AdditionalFieldParameter",
+                    MainPropertyName: "AdditionalFields",
+                    SubPropertyName: "Personnr_søker"
+                },
+                sokerFornavn: {
+                    RootPath: "InsertCases",
+                    MainContract: "CreateCaseParameter",
+                    SubContract: "AdditionalFieldParameter",
+                    MainPropertyName: "AdditionalFields",
+                    SubPropertyName: "sokerFornavn"
+                },
+                sokerEtternavn: {
+                    RootPath: "InsertCases",
+                    MainContract: "CreateCaseParameter",
+                    SubContract: "AdditionalFieldParameter",
+                    MainPropertyName: "AdditionalFields",
+                    SubPropertyName: "sokerEtternavn"
+                },
+                Behandlende_kommune_orgnr: {
+                    RootPath: "InsertCases",
+                    MainContract: "CreateCaseParameter",
+                    SubContract: "AdditionalFieldParameter",
+                    MainPropertyName: "AdditionalFields",
+                    SubPropertyName: "Behandlende_kommune_orgnr"
+                },
+                Behandlende_kommune_navn: {
+                    RootPath: "InsertCases",
+                    MainContract: "CreateCaseParameter",
+                    SubContract: "AdditionalFieldParameter",
+                    MainPropertyName: "AdditionalFields",
+                    SubPropertyName: "Behandlende_kommune_navn"
+                },
+                sokerForetaksnavn: {
+                    RootPath: "InsertCases",
+                    MainContract: "CreateCaseParameter",
+                    SubContract: "AdditionalFieldParameter",
+                    MainPropertyName: "AdditionalFields",
+                    SubPropertyName: "sokerForetaksnavn"
+                }
             },
         },
         metadataForImport: {

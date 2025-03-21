@@ -1,6 +1,6 @@
 // src/mappingUtils.js
 
-export const createTemplateMapping = (documentType, system, responsiblePersonRecnoDocument, responsiblePersonRecnoCase) => {
+export const createTemplateMapping = (documentType, system, responsiblePersonRecnoDocument, responsiblePersonRecnoCase, responsibleEnterpriseRecnoDocument, responsibleEnterpriseRecnoCase) => {
   const mapping = {
     Pattern: documentType,
     DocumentMapping: {
@@ -16,14 +16,14 @@ export const createTemplateMapping = (documentType, system, responsiblePersonRec
         MainContract: "CreateDocumentParameter",
         SubContract: "",
         MainPropertyName: "ResponsiblePersonRecno",
-        Value: responsiblePersonRecnoDocument, // Bruker verdien fra inputfeltet for dokument
+        Value: responsiblePersonRecnoDocument,
       },
       ResponsibleEnterpriseRecno: {
         RootPath: "InsertDocuments",
         MainContract: "CreateDocumentParameter",
         SubContract: "",
         MainPropertyName: "ResponsibleEnterpriseRecno",
-        Value: "200485",
+        Value: responsibleEnterpriseRecnoDocument, // Legg til verdien fra inputfeltet for dokument
       },
       Category: {
         RootPath: "InsertDocuments",
@@ -53,14 +53,14 @@ export const createTemplateMapping = (documentType, system, responsiblePersonRec
         MainContract: "CreateCaseParameter",
         SubContract: "",
         MainPropertyName: "ResponsiblePersonRecno",
-        Value: responsiblePersonRecnoCase, // Bruker verdien fra inputfeltet for sak
+        Value: responsiblePersonRecnoCase,
       },
       ResponsibleEnterpriseRecno: {
         RootPath: "InsertCases",
         MainContract: "CreateCaseParameter",
         SubContract: "",
         MainPropertyName: "ResponsibleEnterpriseRecno",
-        Value: "200485",
+        Value: responsibleEnterpriseRecnoCase, // Legg til verdien fra inputfeltet for sak
       },
     },
   };
@@ -90,22 +90,85 @@ export const createTemplateMapping = (documentType, system, responsiblePersonRec
     },
     metadataFraAvleverendeSystem: {
       ekstraMetadata: {
-        avgivendeSystemMappe: {
-          RootPath: "InsertCases",
-          MainContract: "CreateCaseParameter",
-          SubContract: "AdditionalFieldParameter",
-          MainPropertyName: "AdditionalFields",
-          SubPropertyName: "extersaksref",
-        },
-        gardsnr: {
-          RootPath: "InsertCases",
-          MainContract: "CreateCaseParameter",
-          SubContract: "AdditionalFieldParameter",
-          MainPropertyName: "AdditionalFields",
-          SubPropertyName: "Gardsnr",
-        },
+          avgivendeSystemMappe: {
+              RootPath: "InsertCases",
+              MainContract: "CreateCaseParameter",
+              SubContract: "AdditionalFieldParameter",
+              MainPropertyName: "AdditionalFields",
+              SubPropertyName: "extersaksref",
+          },
+          gardsnr: {
+              RootPath: "InsertCases",
+              MainContract: "CreateCaseParameter",
+              SubContract: "AdditionalFieldParameter",
+              MainPropertyName: "AdditionalFields",
+              SubPropertyName: "Gardsnr",
+          },
+          bruksnr: {
+              RootPath: "InsertCases",
+              MainContract: "CreateCaseParameter",
+              SubContract: "AdditionalFieldParameter",
+              MainPropertyName: "AdditionalFields",
+              SubPropertyName: "Bruksnr"
+          },
+          festenr: {
+              RootPath: "InsertCases",
+              MainContract: "CreateCaseParameter",
+              SubContract: "AdditionalFieldParameter",
+              MainPropertyName: "AdditionalFields",
+              SubPropertyName: "Festenr"
+          },
+          sokerOrgnr: {
+              RootPath: "InsertCases",
+              MainContract: "CreateCaseParameter",
+              SubContract: "AdditionalFieldParameter",
+              MainPropertyName: "AdditionalFields",
+              SubPropertyName: "Orgnr_søker"
+          },
+          sokerFodselsnr: {
+              RootPath: "InsertCases",
+              MainContract: "CreateCaseParameter",
+              SubContract: "AdditionalFieldParameter",
+              MainPropertyName: "AdditionalFields",
+              SubPropertyName: "Personnr_søker"
+          },
+          sokerFornavn: {
+              RootPath: "InsertCases",
+              MainContract: "CreateCaseParameter",
+              SubContract: "AdditionalFieldParameter",
+              MainPropertyName: "AdditionalFields",
+              SubPropertyName: "sokerFornavn"
+          },
+          sokerEtternavn: {
+              RootPath: "InsertCases",
+              MainContract: "CreateCaseParameter",
+              SubContract: "AdditionalFieldParameter",
+              MainPropertyName: "AdditionalFields",
+              SubPropertyName: "sokerEtternavn"
+          },
+          Behandlende_kommune_orgnr: {
+              RootPath: "InsertCases",
+              MainContract: "CreateCaseParameter",
+              SubContract: "AdditionalFieldParameter",
+              MainPropertyName: "AdditionalFields",
+              SubPropertyName: "Behandlende_kommune_orgnr"
+          },
+          Behandlende_kommune_navn: {
+              RootPath: "InsertCases",
+              MainContract: "CreateCaseParameter",
+              SubContract: "AdditionalFieldParameter",
+              MainPropertyName: "AdditionalFields",
+              SubPropertyName: "Behandlende_kommune_navn"
+          },
+          sokerForetaksnavn: {
+              RootPath: "InsertCases",
+              MainContract: "CreateCaseParameter",
+              SubContract: "AdditionalFieldParameter",
+              MainPropertyName: "AdditionalFields",
+              SubPropertyName: "sokerForetaksnavn"
+          }
       },
-    },
+  },
     metadataForImport: {
       sakssekvensnummer: {
         RootPath: "InsertDocuments",
