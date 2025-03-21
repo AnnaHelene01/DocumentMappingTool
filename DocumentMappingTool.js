@@ -15,7 +15,7 @@ const DocumentMappingTool = () => {
     const [selectedDocumentsØKS, setSelectedDocumentsØKS] = useState({});
     const [documentMappings, setDocumentMappings] = useState({});
  
-    // Tilstander for ResponsiblePersonRecno for hvert system
+    // Tilstander for ResponsiblePersonRecno for hvert system - sak og dokument
     const [responsiblePersonRecnoAGROSDocument, setResponsiblePersonRecnoAGROSDocument] = useState("");
     const [responsiblePersonRecnoAGROSCase, setResponsiblePersonRecnoAGROSCase] = useState("");
     const [responsiblePersonRecnoEStilDocument, setResponsiblePersonRecnoEStilDocument] = useState("");
@@ -77,6 +77,7 @@ const DocumentMappingTool = () => {
         setSelectedDocumentsØKS(newSelection);
     };
 
+    //Generere JSON-fil
    const generateFinalJson = () => {
     const selectedMappings = {
         id: {
@@ -217,7 +218,55 @@ const DocumentMappingTool = () => {
     return JSON.stringify(selectedMappings, null, 2);
  };
  
+// Generere JSON kun for AdditionalConfiguration
+const generateAdditionalConfigurationJson = () => {
+    const additionalConfig = {
+        AdditionalConfiguration: {
+            Systems: {
+                AGROS: {
+                    TitleMatching: Object.keys(selectedDocumentsAGROS)
+                        .filter((key) => selectedDocumentsAGROS[key])
+                        .map((key) => {
+                            const mapping = documentMappings[key];
+                            return mapping ? mapping.AdditionalConfiguration.Systems.AGROS.TitleMatching[0] : null;
+                        })
+                        .filter(Boolean),
+                },
+                eStil: {
+                    TitleMatching: Object.keys(selectedDocumentsEStil)
+                        .filter((key) => selectedDocumentsEStil[key])
+                        .map((key) => {
+                            const mapping = documentMappings[key];
+                            return mapping ? mapping.AdditionalConfiguration.Systems.eStil.TitleMatching[0] : null;
+                        })
+                        .filter(Boolean),
+                },
+                PT: {
+                    TitleMatching: Object.keys(selectedDocumentsPT)
+                        .filter((key) => selectedDocumentsPT[key])
+                        .map((key) => {
+                            const mapping = documentMappings[key];
+                            return mapping ? mapping.AdditionalConfiguration.Systems.PT.TitleMatching[0] : null;
+                        })
+                        .filter(Boolean),
+                },
+                ØKS: {
+                    TitleMatching: Object.keys(selectedDocumentsØKS)
+                        .filter((key) => selectedDocumentsØKS[key])
+                        .map((key) => {
+                            const mapping = documentMappings[key];
+                            return mapping ? mapping.AdditionalConfiguration.Systems.ØKS.TitleMatching[0] : null;
+                        })
+                        .filter(Boolean),
+                },
+            },
+        },
+    };
 
+    return JSON.stringify(additionalConfig, null, 2);
+};
+
+//Kodesnutt for å laste ned en fullverdig .json - fil til datamaskinen
    const downloadJson = () => {
           const json = generateFinalJson();
           const blob = new Blob([json], { type: "application/json" });
@@ -232,126 +281,133 @@ const DocumentMappingTool = () => {
     };
 
     return (
-        <div>
-            <h1>Document Mapping Tool</h1>
-            
-            {/* AGROS Document Types */}
-            <div>
-                <h2>AGROS Document Types</h2>
-                <DocumentTypeCheckboxes
-                    documentTypes={sampleDocumentTypesAGROS}
-                    selectedDocuments={selectedDocumentsAGROS}
-                    toggleDocumentSelection={toggleDocumentSelectionAGROS}
-                />
-               <div style={{ display: 'flex', alignItems: 'center', marginTop: '2em' }}>
-                   <label style={{ marginRight: '10px' }}>Responsible Person Recno for AGROS Document:</label>
-                   <input 
-                       type="text" 
-                       value={responsiblePersonRecnoAGROSDocument} 
-                       onChange={(e) => setResponsiblePersonRecnoAGROSDocument(e.target.value)} 
-                       placeholder="Responsible Person Recno for AGROS Document" 
-                   />
-               </div>
-               <div style={{ display: 'flex', alignItems: 'center' }}>
-                   <label style={{ marginRight: '10px' }}>Responsible Person Recno for AGROS Case:</label>
-                   <input 
-                       type="text" 
-                       value={responsiblePersonRecnoAGROSCase} 
-                       onChange={(e) => setResponsiblePersonRecnoAGROSCase(e.target.value)} 
-                       placeholder="Responsible Person Recno for AGROS Case" 
-                   />
-               </div>
-            </div>
-  
-            {/* eStil Document Types */}
-            <div>
-                <h2>eStil Document Types</h2>
-                <DocumentTypeCheckboxes
-                    documentTypes={sampleDocumentTypesEStil}
-                    selectedDocuments={selectedDocumentsEStil}
-                    toggleDocumentSelection={toggleDocumentSelectionEStil}
-                />
-               <div style={{ display: 'flex', alignItems: 'center', marginTop: '2em' }}>
-                   <label style={{ marginRight: '10px' }}>Responsible Person Recno for eStil Document:</label>
-                   <input 
-                       type="text" 
-                       value={responsiblePersonRecnoEStilDocument} 
-                       onChange={(e) => setResponsiblePersonRecnoEStilDocument(e.target.value)} 
-                       placeholder="Responsible Person Recno for eStil Document" 
-                   />
-               </div>
-               <div style={{ display: 'flex', alignItems: 'center' }}>
-                   <label style={{ marginRight: '10px' }}>Responsible Person Recno for eStil Case:</label>
-                   <input 
-                       type="text" 
-                       value={responsiblePersonRecnoEStilCase} 
-                       onChange={(e) => setResponsiblePersonRecnoEStilCase(e.target.value)} 
-                       placeholder="Responsible Person Recno for eStil Case" 
-                   />
-               </div>
-            </div>
-  
-            {/* PT Document Types */}
-            <div>
-                <h2>PT Document Types</h2>
-                <DocumentTypeCheckboxes
-                    documentTypes={sampleDocumentTypesPT}
-                    selectedDocuments={selectedDocumentsPT}
-                    toggleDocumentSelection={toggleDocumentSelectionPT}
-                />
-               <div style={{ display: 'flex', alignItems: 'center', marginTop: '2em' }}>
-                   <label style={{ marginRight: '10px' }}>Responsible Person Recno for PT Document:</label>
-                   <input 
-                       type="text" 
-                       value={responsiblePersonRecnoPTDocument} 
-                       onChange={(e) => setResponsiblePersonRecnoPTDocument(e.target.value)} 
-                       placeholder="Responsible Person Recno for PT Document" 
-                   />
-               </div>
-               <div style={{ display: 'flex', alignItems: 'center' }}>
-                   <label style={{ marginRight: '10px' }}>Responsible Person Recno for PT Case:</label>
-                   <input 
-                       type="text" 
-                       value={responsiblePersonRecnoPTCase} 
-                       onChange={(e) => setResponsiblePersonRecnoPTCase(e.target.value)} 
-                       placeholder="Responsible Person Recno for PT Case" 
-                   />
-               </div>
-            </div>
-  
-            {/* ØKS Document Types */}
-            <div>
-                <h2>ØKS Document Types</h2>
-                <DocumentTypeCheckboxes
-                    documentTypes={sampleDocumentTypesØKS}
-                    selectedDocuments={selectedDocumentsØKS}
-                    toggleDocumentSelection={toggleDocumentSelectionØKS}
-                />
-
-               <div style={{ display: 'flex', alignItems: 'center', marginTop: '2em' }}>
-                   <label style={{ marginRight: '10px' }}>Responsible Person Recno for ØKS Document:</label>
-                   <input 
-                       type="text" 
-                       value={responsiblePersonRecnoØKSDocument} 
-                       onChange={(e) => setResponsiblePersonRecnoØKSDocument(e.target.value)} 
-                       placeholder="Responsible Person Recno for ØKS Document" 
-                   />
-               </div>
-               <div style={{ display: 'flex', alignItems: 'center' }}>
-                   <label style={{ marginRight: '10px' }}>Responsible Person Recno for ØKS Case:</label>
-                   <input 
-                       type="text" 
-                       value={responsiblePersonRecnoØKSCase} 
-                       onChange={(e) => setResponsiblePersonRecnoØKSCase(e.target.value)} 
-                       placeholder="Responsible Person Recno for ØKS Case" 
-                   />
-               </div>
-            </div>
-  
-            <h2>Generated JSON</h2>
-            <pre>{generateFinalJson()}</pre>
-            <button onClick={downloadJson}>Download JSON</button> {/* Legg til eksportknappen */}
+    <div>
+        <h1>Document Mapping Tool</h1>
+        <div className="button-container">
+                <button onClick={downloadJson}>Download JSON</button> {/* Legg til eksportknappen */}
         </div>
+        <div className="flex-main">
+            
+            <div className="flex-left">
+                {/* AGROS Document Types */}
+                <div>
+                    <h2>AGROS Document Types</h2>
+                    <DocumentTypeCheckboxes
+                        documentTypes={sampleDocumentTypesAGROS}
+                        selectedDocuments={selectedDocumentsAGROS}
+                        toggleDocumentSelection={toggleDocumentSelectionAGROS}
+                    />
+                <div style={{ display: 'flex', alignItems: 'center', marginTop: '2em' }}>
+                    <label style={{ marginRight: '10px' }}>Responsible Person Recno for AGROS Document:</label>
+                    <input 
+                        type="text" 
+                        value={responsiblePersonRecnoAGROSDocument} 
+                        onChange={(e) => setResponsiblePersonRecnoAGROSDocument(e.target.value)} 
+                        placeholder="Responsible Person Recno for AGROS Document" 
+                    />
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', marginTop: '1em' }}>
+                    <label style={{ marginRight: '10px' }}>Responsible Person Recno for AGROS Case:</label>
+                    <input 
+                        type="text" 
+                        value={responsiblePersonRecnoAGROSCase} 
+                        onChange={(e) => setResponsiblePersonRecnoAGROSCase(e.target.value)} 
+                        placeholder="Responsible Person Recno for AGROS Case" 
+                    />
+                </div>
+                </div>
+
+                {/* eStil Document Types */}
+                <div>
+                    <h2>eStil Document Types</h2>
+                    <DocumentTypeCheckboxes
+                        documentTypes={sampleDocumentTypesEStil}
+                        selectedDocuments={selectedDocumentsEStil}
+                        toggleDocumentSelection={toggleDocumentSelectionEStil}
+                    />
+                <div style={{ display: 'flex', alignItems: 'center', marginTop: '2em' }}>
+                    <label style={{ marginRight: '10px' }}>Responsible Person Recno for eStil Document:</label>
+                    <input 
+                        type="text" 
+                        value={responsiblePersonRecnoEStilDocument} 
+                        onChange={(e) => setResponsiblePersonRecnoEStilDocument(e.target.value)} 
+                        placeholder="Responsible Person Recno for eStil Document" 
+                    />
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', marginTop: '1em' }}>
+                    <label style={{ marginRight: '10px' }}>Responsible Person Recno for eStil Case:</label>
+                    <input 
+                        type="text" 
+                        value={responsiblePersonRecnoEStilCase} 
+                        onChange={(e) => setResponsiblePersonRecnoEStilCase(e.target.value)} 
+                        placeholder="Responsible Person Recno for eStil Case" 
+                    />
+                </div>
+                </div>
+
+                {/* PT Document Types */}
+                <div>
+                    <h2>PT Document Types</h2>
+                    <DocumentTypeCheckboxes
+                        documentTypes={sampleDocumentTypesPT}
+                        selectedDocuments={selectedDocumentsPT}
+                        toggleDocumentSelection={toggleDocumentSelectionPT}
+                    />
+                <div style={{ display: 'flex', alignItems: 'center', marginTop: '2em' }}>
+                    <label style={{ marginRight: '10px' }}>Responsible Person Recno for PT Document:</label>
+                    <input 
+                        type="text" 
+                        value={responsiblePersonRecnoPTDocument} 
+                        onChange={(e) => setResponsiblePersonRecnoPTDocument(e.target.value)} 
+                        placeholder="Responsible Person Recno for PT Document" 
+                    />
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', marginTop: '1em' }}>
+                    <label style={{ marginRight: '10px' }}>Responsible Person Recno for PT Case:</label>
+                    <input 
+                        type="text" 
+                        value={responsiblePersonRecnoPTCase} 
+                        onChange={(e) => setResponsiblePersonRecnoPTCase(e.target.value)} 
+                        placeholder="Responsible Person Recno for PT Case" 
+                    />
+                </div>
+                </div>
+
+                {/* ØKS Document Types */}
+                <div>
+                    <h2>ØKS Document Types</h2>
+                    <DocumentTypeCheckboxes
+                        documentTypes={sampleDocumentTypesØKS}
+                        selectedDocuments={selectedDocumentsØKS}
+                        toggleDocumentSelection={toggleDocumentSelectionØKS}
+                    />
+
+                <div style={{ display: 'flex', alignItems: 'center', marginTop: '2em' }}>
+                    <label style={{ marginRight: '10px' }}>Responsible Person Recno for ØKS Document:</label>
+                    <input 
+                        type="text" 
+                        value={responsiblePersonRecnoØKSDocument} 
+                        onChange={(e) => setResponsiblePersonRecnoØKSDocument(e.target.value)} 
+                        placeholder="Responsible Person Recno for ØKS Document" 
+                    />
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', marginTop: '1em' }}>
+                    <label style={{ marginRight: '10px' }}>Responsible Person Recno for ØKS Case:</label>
+                    <input 
+                        type="text" 
+                        value={responsiblePersonRecnoØKSCase} 
+                        onChange={(e) => setResponsiblePersonRecnoØKSCase(e.target.value)} 
+                        placeholder="Responsible Person Recno for ØKS Case" 
+                    />
+                </div>
+                </div>
+            </div>
+            <div className="flex-right">
+                <h2>Generated JSON</h2>
+                <pre>{generateAdditionalConfigurationJson()}</pre>
+            </div>
+        </div>
+    </div>
     );
   };
  

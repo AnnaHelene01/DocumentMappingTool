@@ -14,6 +14,30 @@ code {
 
 
 /* index.css */
+/* CSS til bedre UI på siden */
+h1 {
+  text-align: center;
+}
+
+.flex-main {
+  display: flex;
+  justify-content: center; /* Sentrerer horisontalt */
+  }
+
+.flex-right {
+  margin-right: 2em;
+}
+
+.flex-left {
+  margin-right: 4em;
+}
+
+/* CSS til JSON knapp */
+.button-container {
+  display: flex;
+  justify-content: center; /* Sentrerer horisontalt */
+  align-items: center; /* Sentrerer vertikalt, hvis containeren har høyde */
+}
 
 button {
   background-color: #4CAF50; /* Grønn bakgrunn */
