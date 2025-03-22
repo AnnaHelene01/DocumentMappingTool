@@ -1,6 +1,14 @@
 // src/mappingUtils.js
 
-export const createTemplateMapping = (documentType, system, responsiblePersonRecnoDocument, responsiblePersonRecnoCase, responsibleEnterpriseRecnoDocument, responsibleEnterpriseRecnoCase) => {
+export const createTemplateMapping = (
+  documentType, 
+  system, 
+  responsiblePersonRecnoDocument, 
+  responsiblePersonRecnoCase, 
+  responsibleEnterpriseRecnoDocument, 
+  responsibleEnterpriseRecnoCase,
+  caseTitle
+) => {
   const mapping = {
     Pattern: documentType,
     DocumentMapping: {
@@ -39,7 +47,7 @@ export const createTemplateMapping = (documentType, system, responsiblePersonRec
         MainContract: "CreateCaseParameter",
         SubContract: "",
         MainPropertyName: "Title",
-        Value: `GNR/BNR - ${documentType}`,
+        Value: `${caseTitle}`,
       },
       CaseType: {
         RootPath: "InsertCases",

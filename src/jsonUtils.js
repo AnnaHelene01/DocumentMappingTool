@@ -199,4 +199,3 @@ export const generateFinalJson = (selectedDocumentsAGROS, selectedDocumentsEStil
  
     return JSON.stringify(selectedMappings, null, 2);
  };
- 

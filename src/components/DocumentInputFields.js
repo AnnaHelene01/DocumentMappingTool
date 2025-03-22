@@ -1,7 +1,19 @@
 // DocumentInputFields.js
 import React from 'react';
 
-const DocumentInputFields = ({ title, responsiblePersonRecnoDocument, setResponsiblePersonRecnoDocument, responsiblePersonRecnoCase, setResponsiblePersonRecnoCase, responsibleEnterpriseRecnoDocument, setResponsibleEnterpriseRecnoDocument, responsibleEnterpriseRecnoCase, setResponsibleEnterpriseRecnoCase }) => {
+const DocumentInputFields = ({ 
+    title, 
+    responsiblePersonRecnoDocument, 
+    setResponsiblePersonRecnoDocument, 
+    responsiblePersonRecnoCase, 
+    setResponsiblePersonRecnoCase, 
+    responsibleEnterpriseRecnoDocument, 
+    setResponsibleEnterpriseRecnoDocument, 
+    responsibleEnterpriseRecnoCase, 
+    setResponsibleEnterpriseRecnoCase,
+    caseTitle,
+    setCaseTitle 
+}) => {
    return (
        <div className="document-input-fields">
            <h2>{title} Document Types</h2>
@@ -39,6 +51,15 @@ const DocumentInputFields = ({ title, responsiblePersonRecnoDocument, setRespons
                    value={responsibleEnterpriseRecnoCase} 
                    onChange={(e) => setResponsibleEnterpriseRecnoCase(e.target.value)} 
                    placeholder={`Responsible Enterprise Recno for ${title} Case`} 
+               />
+           </div>
+           <div className="input-group">
+               <label>Case title for {title} Case:</label>
+               <input 
+                   type="text" 
+                   value={caseTitle} 
+                   onChange={(e) => setCaseTitle(e.target.value)} 
+                   placeholder={`Case title for ${title} Case`} 
                />
            </div>
        </div>
