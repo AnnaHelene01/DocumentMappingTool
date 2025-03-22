@@ -1,0 +1,77 @@
+/* index.css */
+/* CSS til bedre UI på siden */
+body {
+  margin: 5em;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+ }
+ 
+ h1 {
+  text-align: center;
+ }
+ 
+ .flex-main {
+  display: flex;
+  justify-content: center; /* Sentrerer horisontalt */
+ }
+ 
+ .flex-right {
+  margin-right: 2em;
+ }
+ 
+ .flex-left {
+  margin-right: 4em;
+ }
+ 
+ /* CSS til JSON knapp */
+ .button-container {
+  display: flex;
+  justify-content: center; /* Sentrerer horisontalt */
+  align-items: center; /* Sentrerer vertikalt, hvis containeren har høyde */
+ }
+ 
+ button {
+  background-color: #4CAF50; /* Grønn bakgrunn */
+  color: white; /* Hvit tekst */
+  border: none; /* Ingen kantlinje */
+  padding: 10px 20px; /* Polstring rundt teksten */
+  text-align: center; /* Sentrer teksten */
+  text-decoration: none; /* Ingen understreking */
+  display: inline-block; /* Inline blokk for å kunne bruke margin */
+  font-size: 16px; /* Størrelse på teksten */
+  margin: 4px 2px; /* Margin rundt knappen */
+  cursor: pointer; /* Endre musepekeren til hånd */
+  border-radius: 5px; /* Runde hjørner */
+  transition: background-color 0.3s; /* Animasjon for bakgrunnsfarge */
+ }
+ 
+ button:hover {
+  background-color: #45a049; /* Mørkere grønn ved hover */
+ }
+ 
+ /* Styling for DocumentInputFields */
+ .document-input-fields {
+  margin-top: 2em;
+  margin-bottom: 2em;
+ }
+ 
+ .input-group {
+  display: flex;
+  flex-direction: column; /* Endre retningen til kolonne */
+  margin-top: 1em; /* Avstand mellom grupper */
+ }
+ 
+ .input-group label {
+  margin-bottom: 5px; /* Avstand mellom label og input */
+ }
+ 
+ .input-group input {
+  padding: 8px; /* Polstring for input-feltet */
+  border: 1px solid #ccc; /* Kantlinje for input-feltet */
+  border-radius: 4px; /* Runde hjørner for input-feltet */
+  max-width: 360px; /* Maks bredde på input-felt*/
+ }
+ 
