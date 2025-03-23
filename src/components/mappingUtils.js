@@ -19,14 +19,14 @@ export const createTemplateMapping = (
         MainContract: "CreateDocumentParameter",
         SubContract: "",
         MainPropertyName: "Title",
-        Value: "Søknad om tilskudd til avløsning ved sykdom og fødsel",
+        Value: `${documentType}`,
       },
       UnofficialTitle: {
         RootPath: "InsertDocuments",
         MainContract: "CreateDocumentParameter",
         SubContract: "",
         MainPropertyName: "UnofficialTitle",
-        Value: "Søknad om tilskudd til avløsning ved sykdom og fødsel - GNR/BNR",
+      Value: `GNR/BNR - ${documentType}`,
       },
       ResponsiblePersonRecno: {
         RootPath: "InsertDocuments",

@@ -8,6 +8,10 @@ import {
 import DocumentTypeCheckboxes from "./documentTypeCheckBoxes"; // Importer sjekkboks-komponenten
 import { generateFinalJson } from "./jsonUtils";
 import {
+    toggleSelectAllAGROS,
+    toggleSelectAllEStil,
+    toggleSelectAllPT,
+    toggleSelectAllØKS,
     toggleDocumentSelectionAGROS,
     toggleDocumentSelectionEStil,
     toggleDocumentSelectionPT,
@@ -88,6 +92,8 @@ const DocumentMappingTool = () => {
                         documentTypes={sampleDocumentTypesAGROS}
                         selectedDocuments={selectedDocumentsAGROS}
                         toggleDocumentSelection={(type, isChecked) => toggleDocumentSelectionAGROS(type, selectedDocumentsAGROS, documentMappings, setSelectedDocumentsAGROS, setDocumentMappings, responsiblePersonRecnoAGROSDocument, responsiblePersonRecnoAGROSCase, responsibleEnterpriseRecnoAGROSDocument, responsibleEnterpriseRecnoAGROSCase, caseTitleAGROSCase, isChecked)}
+                        toggleSelectAll={(documentTypes, selectedDocuments, isChecked) => toggleSelectAllAGROS(documentTypes, selectedDocuments, setSelectedDocumentsAGROS, setDocumentMappings, responsiblePersonRecnoAGROSDocument, responsiblePersonRecnoAGROSCase, responsibleEnterpriseRecnoAGROSDocument, responsibleEnterpriseRecnoAGROSCase, caseTitleAGROSCase, isChecked)}
+
                     />
  
                     {/* eStil Document Types */}
@@ -108,6 +114,7 @@ const DocumentMappingTool = () => {
                         documentTypes={sampleDocumentTypesEStil}
                         selectedDocuments={selectedDocumentsEStil}
                         toggleDocumentSelection={(type, isChecked) => toggleDocumentSelectionEStil(type, selectedDocumentsEStil, documentMappings, setSelectedDocumentsEStil, setDocumentMappings, responsiblePersonRecnoEStilDocument, responsiblePersonRecnoEStilCase, responsibleEnterpriseRecnoEStilDocument, responsibleEnterpriseRecnoEStilCase, caseTitleEStilCase, isChecked)}
+                        toggleSelectAll={(documentTypes, isChecked) => toggleSelectAllEStil(documentTypes, documentMappings, setSelectedDocumentsEStil, setDocumentMappings, responsiblePersonRecnoEStilDocument, responsiblePersonRecnoEStilCase, responsibleEnterpriseRecnoEStilDocument, responsibleEnterpriseRecnoEStilCase, caseTitleEStilCase, isChecked)}
                     />
  
                     {/* PT Document Types */}
@@ -129,7 +136,8 @@ const DocumentMappingTool = () => {
                         documentTypes={sampleDocumentTypesPT}
                         selectedDocuments={selectedDocumentsPT}
                         toggleDocumentSelection={(type, isChecked) => toggleDocumentSelectionPT(type, selectedDocumentsPT, documentMappings, setSelectedDocumentsPT, setDocumentMappings, responsiblePersonRecnoPTDocument, responsiblePersonRecnoPTCase, responsibleEnterpriseRecnoPTDocument, responsibleEnterpriseRecnoPTCase, caseTitlePTCase, isChecked)}
-                    />
+                        toggleSelectAll={(documentTypes, isChecked) => toggleSelectAllPT(documentTypes, documentMappings, setSelectedDocumentsPT, setDocumentMappings, responsiblePersonRecnoPTDocument, responsiblePersonRecnoPTCase, responsibleEnterpriseRecnoPTDocument, responsibleEnterpriseRecnoPTCase, caseTitlePTCase, isChecked)}
+                   />
  
                     {/* ØKS Document Types */}
                     <DocumentInputFields 
@@ -149,6 +157,7 @@ const DocumentMappingTool = () => {
                         documentTypes={sampleDocumentTypesØKS}
                         selectedDocuments={selectedDocumentsØKS}
                         toggleDocumentSelection={(type, isChecked) => toggleDocumentSelectionØKS(type, selectedDocumentsØKS, documentMappings, setSelectedDocumentsØKS, setDocumentMappings, responsiblePersonRecnoØKSDocument, responsiblePersonRecnoØKSCase, responsibleEnterpriseRecnoØKSDocument, responsibleEnterpriseRecnoØKSCase, caseTitleØKSCase, isChecked)}
+                        toggleSelectAll={(documentTypes, isChecked) => toggleSelectAllØKS(documentTypes, documentMappings, setSelectedDocumentsØKS, setDocumentMappings, responsiblePersonRecnoØKSDocument, responsiblePersonRecnoØKSCase, responsibleEnterpriseRecnoØKSDocument, responsibleEnterpriseRecnoØKSCase, caseTitleØKSCase, isChecked)}
                     />
                 </div>
                 <div className="flex-right">
